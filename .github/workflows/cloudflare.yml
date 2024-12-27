@@ -1,9 +1,5 @@
 name: Deploy Worker
 
-# this action is for the "deploy to cloudflare" button
-# repository_dispatch is triggered by CF
-# secrets should also be made by CF
-
 on: ["repository_dispatch"]
 
 jobs:
@@ -23,14 +19,21 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
+      - name: Clear npm cache
+        run: npm cache clean --force
+
       - name: Install packages
-        run: pnpm install --frozen-lockfile
+        run:### Error Analysis:
+The logs indicate an **npm error** due pnpm install --frozen-lockfile
 
       - name: Build Project
-        run: pnpm build:cloudflare
+ to attempting to read properties of `null`:
+- **        run: pnpm build:cloudflare
 
-      - name: Build & Deploy Worker
-        uses: cloudflare/wrangler-action@v3.1.0
+      - nameError Message:** `Cannot read properties of null (: Build & Deploy Worker
+        uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
+          apiToken:reading 'matches')`
+- **Cause:** This error typically ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          wrangler-version: 3.99.0
