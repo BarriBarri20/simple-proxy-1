@@ -23,17 +23,14 @@ jobs:
         run: npm cache clean --force
 
       - name: Install packages
-        run:### Error Analysis:
-The logs indicate an **npm error** due pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build Project
- to attempting to read properties of `null`:
-- **        run: pnpm build:cloudflare
+        run: pnpm build:cloudflare
 
-      - nameError Message:** `Cannot read properties of null (: Build & Deploy Worker
+      - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
-          apiToken:reading 'matches')`
-- **Cause:** This error typically ${{ secrets.CF_API_TOKEN }}
+          apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           wrangler-version: 3.99.0
